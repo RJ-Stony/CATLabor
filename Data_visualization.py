@@ -14,7 +14,7 @@ def plot(df):
     
     chart_data = pd.DataFrame(
         df.loc[idx, ['2017', '2018', '2019', '2020', '2021']],
-        columns=['2017', '2018', '2019', '2020', '2021'])
+        ['2017', '2018', '2019', '2020', '2021'])
 
     st.line_chart(chart_data)
 
