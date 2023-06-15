@@ -1,8 +1,19 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv("by_age_group(17~21).csv", encoding='cp949')
+category = ["업종별", "발생형태별", "연령별", "요양기간별", "근속기간별"]
+add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", category)
 
-if st.checkbox('Show raw data'):
-    st.subheader('Raw data')
-    st.write(df)
+if add_selectbox == "업종별":
+    df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
+    if st.checkbox('원데이터 살펴보기'):
+        st.subheader('Raw Data')
+        st.write(df)
+
+# Using "with" notation
+with st.sidebar:
+    add_radio = st.radio(
+        "Choose a shipping method",
+        ("Standard (5-15 days)", "Express (2-5 days)")
+    )
+    
