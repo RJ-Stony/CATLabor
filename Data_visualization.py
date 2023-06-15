@@ -20,6 +20,7 @@ def plot(df):
             '2021': df.loc[idx, ['2021', '2021.1', '2021.2', '2021.3']].values.tolist()[0]}
     
     chart_data = pd.DataFrame.from_dict(data=data, orient='index', columns=['사업장 수', '근로자 수', '요양재해자 수', '사망자 수'])
+    chart_data = chart_data.replace('-', 0)
     chart_data = chart_data.astype(int, errors='ignore')
     st.line_chart(chart_data)
 
