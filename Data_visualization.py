@@ -13,7 +13,7 @@ def plot(df):
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
-    st.write(df.loc[idx, ['2017', '2017.1', '2017.2', '2017.3']].values.tolist())
+    st.write(df.loc[idx, ['2017', '2017.1', '2017.2', '2017.3']].values.tolist()[0])
 
     chart_data = pd.DataFrame([df.loc[idx, ['2017', '2017.1', '2017.2', '2017.3']].values.tolist(),
                                df.loc[idx, ['2018', '2018.1', '2018.2', '2018.3']].values.tolist(),
