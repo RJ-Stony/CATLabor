@@ -10,9 +10,14 @@ def plot(df):
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
-    dfs = {country: df[df["산업중분류별(2)"] == country] for country in countries}
+    index_number = df.index[(df["산업중분류별(2)"] == industries)]
+    st.write(df.iloc[index_number].to_list())
+    
+    '''chart_data = pd.DataFrame(
+        np.random.randn(20, 3),
+        columns=['2017', '2018', '2019', '2020', '2021'])
 
-    st.wirte(dfs.items())
+    st.line_chart(chart_data)'''
 
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
