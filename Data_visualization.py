@@ -9,7 +9,7 @@ add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", cat
 def plot(df):
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
-    st.header("{}을 선택해주셨네요.".format(", ".join(industries)))
+    st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
 
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
