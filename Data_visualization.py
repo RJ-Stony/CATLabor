@@ -11,10 +11,9 @@ def plot(df):
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
-    idx = df.index[(df["산업중분류별(2)"] == industries)]
-    st.write(list(idx))
+    idx = df.index[(df["산업중분류별(2)"] == industries[0])]
 
-    st.write(df.loc[idxs, ['2017', '2018', '2019', '2020', '2021']])
+    st.write(df.loc[idx, ['2017', '2018', '2019', '2020', '2021']])
 
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
