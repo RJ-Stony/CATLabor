@@ -11,7 +11,7 @@ def plot(df):
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     index_number = df.index[df["산업중분류별(2)"] == industries]
-    st.write(df.iloc[index_number].to_list())
+    st.write(index_number)
     
     '''chart_data = pd.DataFrame(
         np.random.randn(20, 3),
