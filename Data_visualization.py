@@ -8,7 +8,7 @@ category = ["업종별", "발생형태별", "연령별", "요양기간별", "근
 add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", category)
 
 def plot(df):
-    idxs = []
+    df = df.astype(int)
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(industries))
