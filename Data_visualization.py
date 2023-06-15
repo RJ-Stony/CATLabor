@@ -13,7 +13,14 @@ def plot(df):
     st.subheader("{}을 선택해주셨네요.".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
-    st.write(df.loc[idx, ['2017', '2018', '2019', '2020', '2021']])
+    chart_data = pd.DataFrame([[df.loc[idx, '2017'], df.loc[idx, '2017.1'], df.loc[idx, '2017.2'], df.loc[idx, '2017.3']],
+                               [df.loc[idx, '2018'], df.loc[idx, '2018.1'], df.loc[idx, '2018.2'], df.loc[idx, '2018.3']],
+                               [df.loc[idx, '2019'], df.loc[idx, '2019.1'], df.loc[idx, '2019.2'], df.loc[idx, '2019.3']],
+                               [df.loc[idx, '2020'], df.loc[idx, '2020.1'], df.loc[idx, '2020.2'], df.loc[idx, '2020.3']],
+                               [df.loc[idx, '2021'], df.loc[idx, '2021.1'], df.loc[idx, '2021.2'], df.loc[idx, '2021.3']]], 
+                               columns=['사업장 수', '근로자 수', '요양재해자 수', '사망자 수'])
+    
+    st.line_chart(chart_data)
 
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
