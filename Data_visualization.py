@@ -11,6 +11,7 @@ def plot(df):
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     index_number = df.index[(df["산업중분류별(2)"] == industries[0])]
+    st.write(df.iloc[index_number].to_list())
     
     '''chart_data = pd.DataFrame(
         np.random.randn(20, 3),
@@ -48,11 +49,4 @@ elif add_selectbox == "근속기간별":
     if st.checkbox('원데이터 살펴보기'):
         st.subheader('Raw Data')
         st.write(df)
-    
-# Using "with" notation
-with st.sidebar:
-    add_radio = st.radio(
-        "Choose a shipping method",
-        ("Standard (5-15 days)", "Express (2-5 days)")
-    )
     
