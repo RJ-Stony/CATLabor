@@ -25,7 +25,7 @@ def plot_by_industry(df):
     st.line_chart(chart_data)
     
 def plot_by_age(df):
-    ilist = df["산업중분류별(2)"].unique().tolist()
+    ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
     st.write(ilist)
     industries = st.selectbox("업종을 선택해주세요!", ilist[3:5])
     st.subheader("{}을 선택해주셨네요.".format(industries))
