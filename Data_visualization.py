@@ -65,7 +65,7 @@ def plot_by_age(df):
     chart_data = chart_data.astype(int, errors='ignore')
     st.line_chart(chart_data)
 
-def plot_by_age(df):
+def plot_by_type_of_occurrence(df):
     ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요!".format(industries))
@@ -174,6 +174,7 @@ elif add_selectbox == "발생형태별":
     if st.checkbox('원데이터 살펴보기'):
         st.subheader('Raw Data')
         st.write(df)
+    plot_by_type_of_occurrence(df)
         
 elif add_selectbox == "연령별":
     df = pd.read_csv("by_age_group(17~21).csv", encoding='cp949')
