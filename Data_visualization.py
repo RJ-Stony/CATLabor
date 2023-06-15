@@ -65,6 +65,36 @@ def plot_by_age(df):
     chart_data = chart_data.astype(int, errors='ignore')
     st.line_chart(chart_data)
 
+def plot_by_period_of_care(df):
+    ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
+    industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
+    st.subheader("{}을 선택해주셨네요.".format(industries))
+    idx = df.index[(df["산업중분류별(2)"] == industries)]
+
+    data1 = {'2017': df.loc[idx, '2017'].values.tolist()[0],
+            '2018': df.loc[idx, '2018'].values.tolist()[0],
+            '2019': df.loc[idx, '2019'].values.tolist()[0],
+            '2020': df.loc[idx, '2020'].values.tolist()[0],
+            '2021': df.loc[idx, '2021'].values.tolist()[0]}
+    
+    total_data = pd.DataFrame.from_dict(data=data1, orient='index',
+                                        columns=['요양재해자 수'])
+    total_data = total_data.replace('-', 0)
+    total_data = total_data.astype(int, errors='ignore')
+    st.line_chart(total_data)
+    
+    data2 = {'2017': df.loc[idx, ['2017.2', '2017.3', '2017.4', '2017.5', '2017.6', '2017.7']].values.tolist()[0],
+            '2018': df.loc[idx, ['2018.2', '2018.3', '2018.4', '2018.5', '2018.6', '2018.7']].values.tolist()[0],
+            '2019': df.loc[idx, ['2019.2', '2019.3', '2019.4', '2019.5', '2019.6', '2019.7']].values.tolist()[0],
+            '2020': df.loc[idx, ['2020.2', '2020.3', '2020.4', '2020.5', '2020.6', '2020.7']].values.tolist()[0],
+            '2021': df.loc[idx, ['2021.2', '2021.3', '2021.4', '2021.5', '2021.6', '2021.7']].values.tolist()[0]}
+    
+    chart_data = pd.DataFrame.from_dict(data=data2, orient='index',
+                                        columns=['6개월 이상', '91~180일', '29~90일', '15~28일', '8~14일', '4~7일'])
+    chart_data = chart_data.replace('-', 0)
+    chart_data = chart_data.astype(int, errors='ignore')
+    st.line_chart(chart_data)
+    
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
     if st.checkbox('원데이터 살펴보기'):
