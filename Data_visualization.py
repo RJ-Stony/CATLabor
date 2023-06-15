@@ -13,7 +13,6 @@ def plot(df):
     idx = df.index[(df["산업중분류별(2)"] == industries[0])]
 
     chart_data = pd.DataFrame(
-        ['2017', '2018', '2019', '2020', '2021'],
         df.loc[idx, ['2017', '2018', '2019', '2020', '2021']],
         columns=industries
     )
