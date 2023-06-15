@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 
 category = ["업종별", "발생형태별", "연령별", "요양기간별", "근속기간별"]
 add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", category)
