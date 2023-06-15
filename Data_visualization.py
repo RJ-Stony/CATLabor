@@ -12,7 +12,7 @@ def plot(df):
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     index_number = df.index[(df["산업중분류별(2)"] == industries[0])]
     
-    st.write(df.iloc[index_number].to_list())
+    st.write(df.iloc[int(index_number)].to_list())
     
     '''chart_data = pd.DataFrame(
         np.random.randn(20, 3),
