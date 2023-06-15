@@ -13,6 +13,7 @@ def plot(df):
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     idx = df.index[(df["산업중분류별(2)"] == industries[0])]
     idxs.append(idx)
+    st.write(idxs)
 
     st.write(df.loc[idxs, ['2017', '2018', '2019', '2020', '2021']])
 
