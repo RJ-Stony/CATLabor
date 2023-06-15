@@ -12,10 +12,10 @@ def plot(df):
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     idx = df.index[(df["산업중분류별(2)"] == industries[0])]
 
-    st.line_chart(
-        data=df,
-        x=['2017', '2018', '2019', '2020', '2021'],
-        y=df.loc[idx, ['2017', '2018', '2019', '2020', '2021']]
+    chart_data = pd.DataFrame(
+        ['2017', '2018', '2019', '2020', '2021'],
+        df.loc[idx, ['2017', '2018', '2019', '2020', '2021']],
+        columns=industries
     )
 
 if add_selectbox == "업종별":
