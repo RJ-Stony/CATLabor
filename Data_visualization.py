@@ -7,15 +7,14 @@ category = ["업종별", "발생형태별", "연령별", "요양기간별", "근
 add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", category)
 
 def plot(df):
+    idxs = []
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.multiselect("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
     idx = df.index[(df["산업중분류별(2)"] == industries[0])]
+    idxs.append(idx)
 
-    chart_data = pd.DataFrame(
-        df.loc[idx, ['2017', '2018', '2019', '2020', '2021']],
-        columns=industries
-    )
+    st.write(df.loc[idxs, ['2017', '2018', '2019', '2020', '2021']])
 
 if add_selectbox == "업종별":
     df = pd.read_csv("by_industry(17~21).csv", encoding='cp949')
