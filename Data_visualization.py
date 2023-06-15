@@ -8,7 +8,6 @@ category = ["업종별", "발생형태별", "연령별", "요양기간별", "근
 add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", category)
 
 def plot(df):
-    df = df.astype(int, errors='ignore')
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
     st.subheader("{}을 선택해주셨네요.".format(industries))
@@ -20,7 +19,7 @@ def plot(df):
             '2020': df.loc[idx, ['2020', '2020.1', '2020.2', '2020.3']].values.tolist()[0],
             '2021': df.loc[idx, ['2021', '2021.1', '2021.2', '2021.3']].values.tolist()[0]}
     
-    chart_data = pd.DataFrame.from_dict(data=data, orient='index', columns=['사업장 수', '근로자 수', '요양재해자 수', '사망자 수'])
+    chart_data = pd.DataFrame.from_dict(data=data.astype(int, errors='ignore'), orient='index', columns=['사업장 수', '근로자 수', '요양재해자 수', '사망자 수'])
     st.line_chart(chart_data)
 
 if add_selectbox == "업종별":
