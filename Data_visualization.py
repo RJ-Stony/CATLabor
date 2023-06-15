@@ -10,7 +10,7 @@ def plot(df):
     idxs = []
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
-    st.subheader("{}을 선택해주셨네요.".format(", ".join(industries)))
+    st.subheader("{}을 선택해주셨네요.".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
     st.write(df.loc[idx, ['2017', '2018', '2019', '2020', '2021']])
