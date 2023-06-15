@@ -10,6 +10,30 @@ if add_selectbox == "업종별":
         st.subheader('Raw Data')
         st.write(df)
 
+elif add_selectbox == "발생형태별":
+    df = pd.read_csv("by_type_of_occurrence(17~21).csv", encoding='cp949')
+    if st.checkbox('원데이터 살펴보기'):
+        st.subheader('Raw Data')
+        st.write(df)
+        
+elif add_selectbox == "연령별":
+    df = pd.read_csv("by_age_group(17~21).csv", encoding='cp949')
+    if st.checkbox('원데이터 살펴보기'):
+        st.subheader('Raw Data')
+        st.write(df)
+        
+elif add_selectbox == "요양기간별":
+    df = pd.read_csv("by_period_of_care(17~21).csv", encoding='cp949')
+    if st.checkbox('원데이터 살펴보기'):
+        st.subheader('Raw Data')
+        st.write(df)
+        
+elif add_selectbox == "근속기간별":
+    df = pd.read_csv("by_length_of_employment(17~21).csv", encoding='cp949')
+    if st.checkbox('원데이터 살펴보기'):
+        st.subheader('Raw Data')
+        st.write(df)
+    
 # Using "with" notation
 with st.sidebar:
     add_radio = st.radio(
