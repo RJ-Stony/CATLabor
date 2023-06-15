@@ -120,6 +120,7 @@ elif add_selectbox == "요양기간별":
     if st.checkbox('원데이터 살펴보기'):
         st.subheader('Raw Data')
         st.write(df)
+    plot_by_period_of_care(df)
         
 elif add_selectbox == "근속기간별":
     df = pd.read_csv("by_length_of_employment(17~21).csv", encoding='cp949')
