@@ -10,7 +10,7 @@ add_selectbox = st.sidebar.selectbox("어떤 데이터를 원하시나요?", cat
 def plot_by_industry(df):
     ilist = df["산업중분류별(2)"].unique().tolist()
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
-    st.subheader("{}을 선택해주셨네요.".format(industries))
+    st.subheader("{}을 선택해주셨네요!".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
     data1 = {'2017': df.loc[idx, '2017.4'].values.tolist()[0],
@@ -38,7 +38,7 @@ def plot_by_industry(df):
 def plot_by_age(df):
     ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
-    st.subheader("{}을 선택해주셨네요.".format(industries))
+    st.subheader("{}을 선택해주셨네요!".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
     data1 = {'2017': df.loc[idx, '2017'].values.tolist()[0],
@@ -68,7 +68,7 @@ def plot_by_age(df):
 def plot_by_period_of_care(df):
     ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
     industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
-    st.subheader("{}을 선택해주셨네요.".format(industries))
+    st.subheader("{}을 선택해주셨네요!".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
     data1 = {'2017': df.loc[idx, '2017'].values.tolist()[0],
@@ -91,6 +91,36 @@ def plot_by_period_of_care(df):
     
     chart_data = pd.DataFrame.from_dict(data=data2, orient='index',
                                         columns=['6개월 이상', '91~180일', '29~90일', '15~28일', '8~14일', '4~7일'])
+    chart_data = chart_data.replace('-', 0)
+    chart_data = chart_data.astype(int, errors='ignore')
+    st.line_chart(chart_data)
+    
+def plot_by_length_of_employment(df):
+    ilist = [x for x in df["산업중분류별(2)"].unique().tolist() if x != '소계']
+    industries = st.selectbox("업종을 선택해주세요!", ilist[1:])
+    st.subheader("{}을 선택해주셨네요!".format(industries))
+    idx = df.index[(df["산업중분류별(2)"] == industries)]
+
+    data1 = {'2017': df.loc[idx, '2017'].values.tolist()[0],
+            '2018': df.loc[idx, '2018'].values.tolist()[0],
+            '2019': df.loc[idx, '2019'].values.tolist()[0],
+            '2020': df.loc[idx, '2020'].values.tolist()[0],
+            '2021': df.loc[idx, '2021'].values.tolist()[0]}
+    
+    total_data = pd.DataFrame.from_dict(data=data1, orient='index',
+                                        columns=['합계'])
+    total_data = total_data.replace('-', 0)
+    total_data = total_data.astype(int, errors='ignore')
+    st.line_chart(total_data)
+    
+    data2 = {'2017': df.loc[idx, ['2017.1', '2017.2', '2017.3', '2017.4', '2017.5', '2017.6', '2017.7', '2017.8', '2017.9']].values.tolist()[0],
+            '2018': df.loc[idx, ['2018.1', '2018.2', '2018.3', '2018.4', '2018.5', '2018.6', '2018.7', '2018.8', '2018.9']].values.tolist()[0],
+            '2019': df.loc[idx, ['2019.1', '2019.2', '2019.3', '2019.4', '2019.5', '2019.6', '2019.7', '2019.8', '2019.9']].values.tolist()[0],
+            '2020': df.loc[idx, ['2020.1', '2020.2', '2020.3', '2020.4', '2020.5', '2020.6', '2020.7', '2020.8', '2020.9']].values.tolist()[0],
+            '2021': df.loc[idx, ['2021.1', '2021.2', '2021.3', '2021.4', '2021.5', '2021.6', '2021.7', '2021.8', '2021.9']].values.tolist()[0]}
+    
+    chart_data = pd.DataFrame.from_dict(data=data2, orient='index',
+                                        columns=['6개월 미만', '6개월~1년 미만', '1~2년 미만', '2~3년 미만', '3~4년 미만', '4~5년 미만', '5~10년 미만', '10년 이상', '분류불능'])
     chart_data = chart_data.replace('-', 0)
     chart_data = chart_data.astype(int, errors='ignore')
     st.line_chart(chart_data)
@@ -127,4 +157,5 @@ elif add_selectbox == "근속기간별":
     if st.checkbox('원데이터 살펴보기'):
         st.subheader('Raw Data')
         st.write(df)
+    plot_by_length_of_employment(df)
     
