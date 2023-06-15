@@ -14,11 +14,11 @@ def plot(df):
     st.subheader("{}을 선택해주셨네요.".format(industries))
     idx = df.index[(df["산업중분류별(2)"] == industries)]
 
-    chart_data = pd.DataFrame([df.loc[idx, ['2017', '2017.1', '2017.2', '2017.3']].values.tolist()),
-                               df.loc[idx, ['2018', '2018.1', '2018.2', '2018.3']].values.tolist()),
-                               df.loc[idx, ['2019', '2019.1', '2019.2', '2019.3']].values.tolist()),
-                               df.loc[idx, ['2020', '2020.1', '2020.2', '2020.3']].values.tolist()),
-                               df.loc[idx, ['2021', '2021.1', '2021.2', '2021.3']].values.tolist())],
+    chart_data = pd.DataFrame([df.loc[idx, ['2017', '2017.1', '2017.2', '2017.3']].values.tolist(),
+                               df.loc[idx, ['2018', '2018.1', '2018.2', '2018.3']].values.tolist(),
+                               df.loc[idx, ['2019', '2019.1', '2019.2', '2019.3']].values.tolist(),
+                               df.loc[idx, ['2020', '2020.1', '2020.2', '2020.3']].values.tolist(),
+                               df.loc[idx, ['2021', '2021.1', '2021.2', '2021.3']].values.tolist()],
                                columns=['사업장 수', '근로자 수', '요양재해자 수', '사망자 수'])
     
     st.line_chart(chart_data)
